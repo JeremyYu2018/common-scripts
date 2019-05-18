@@ -162,7 +162,7 @@ ${base_dir}/bin/mysqld --defaults-file=/${data_root_dir}/mysql/${mysql_port}/my.
 
 
 #backup
-mv etc/systemd/system/mysqld_${mysql_port}.service etc/systemd/system/mysqld_${mysql_port}.service.bak > /dev/null 2>&1
+mv /etc/systemd/system/mysqld_${mysql_port}.service /etc/systemd/system/mysqld_${mysql_port}.service.bak.$(date +%FT%H:%M:%S) > /dev/null 2>&1
 
 cat > /etc/systemd/system/mysqld_${mysql_port}.service << EOF
 # Copyright (c) 2015, Oracle and/or its affiliates. All rights reserved.
