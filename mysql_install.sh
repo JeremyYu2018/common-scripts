@@ -9,7 +9,7 @@ data_root_dir="data"
 
 read  -p  "Please Input a mysql port:"  -t 30  mysql_port
 
-mysqlTarFile="mysql-5.7.21-linux-glibc2.12-x86_64.tar.gz"
+mysqlTarFile="mysql-5.7.25-linux-glibc2.12-x86_64.tar.gz"
 
 mysqld_version=$(echo ${mysqlTarFile} | awk  -F "-" '{print $2}')
 base_dir="/usr/local/mysql/${mysqld_version}"
@@ -46,7 +46,7 @@ then
     mkdir ${base_dir}  -p
     echo "untar and unzip mysql tar file........."
     tar zxvf ${mysqlTarFile} -C  ${base_dir} --strip-components 1
-    chown -R mysql:mysql ${mysqlTarFile}
+    chown -R mysql:mysql ${base_dir}
 fi
 
 
@@ -159,16 +159,17 @@ chown mysql:mysql /${data_root_dir}/mysql/${mysql_port}/my.cnf
 echo 
 echo "initializing mysql data........."
 ${base_dir}/bin/mysqld --defaults-file=/${data_root_dir}/mysql/${mysql_port}/my.cnf --initialize-insecure
-if [ "$?" -ne 0]
+if [ "$?" -ne 0 ]
 then
   echo "mysql data initialize failed, please check mysql-error log for detail"
+  exit 2
 else
-  echo "mysql datadir initialize finished"
+  echo "mysql datadir initialize success"
 fi
 
 
 #backup
-mv /etc/systemd/system/mysqld_${mysql_port}.service /etc/systemd/system/mysqld_${mysql_port}.service.bak.$(date +%FT%H:%M:%S) > /dev/null 2>&1
+mv /etc/systemd/system/mysqld_${mysql_port}.service /tmp/mysqld_${mysql_port}.service.bak.$(date +%FT%H:%M:%S) > /dev/null 2>&1
 
 cat > /etc/systemd/system/mysqld_${mysql_port}.service << EOF
 # Copyright (c) 2015, Oracle and/or its affiliates. All rights reserved.
