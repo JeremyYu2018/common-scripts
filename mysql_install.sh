@@ -159,6 +159,12 @@ chown mysql:mysql /${data_root_dir}/mysql/${mysql_port}/my.cnf
 echo 
 echo "initializing mysql data........."
 ${base_dir}/bin/mysqld --defaults-file=/${data_root_dir}/mysql/${mysql_port}/my.cnf --initialize-insecure
+if [ "$?" -ne 0]
+then
+  echo "mysql data initialize failed, please check mysql-error log for detail"
+else
+  echo "mysql datadir initialize finished"
+fi
 
 
 #backup
@@ -223,5 +229,4 @@ then
     #echo "export PATH=\$PATH:${base_dir}/bin" >> /etc/profile 
 fi
 
-echo 
-echo "Install mysql finished, Use systemctl start/stop/status/disable/enable mysqld_${mysql_port}.service to manage mysqld process......"
+echo "all finshed, Use systemctl start/stop/status/disable/enable mysqld_${mysql_port}.service to manage mysqld process......"
