@@ -227,7 +227,12 @@ LimitNPROC = 65535
 EOF
 
 systemctl daemon-reload
-
+if [ $? -ne 0 ]
+then
+   echo "systemctl daemon reload failed please check it manaually"
+else 
+   echo "systemctl daemon reload success"
+fi 
 $(which mysql > /dev/null 2>&1)
 if [ $? -ne 0 ]
 then
