@@ -9,7 +9,7 @@ data_root_dir="data"
 
 read  -p  "Please Input a mysql port:"  -t 30  mysql_port
 
-mysqlTarFile="mysql-5.7.25-linux-glibc2.12-x86_64.tar.gz"
+mysqlTarFile="mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz"
 
 mysqld_version=$(echo ${mysqlTarFile} | awk  -F "-" '{print $2}')
 base_dir="/usr/local/mysql/${mysqld_version}"
@@ -54,10 +54,11 @@ cat > /${data_root_dir}/mysql/${mysql_port}/my.cnf << EOF
 [mysqld]
 user 	  = mysql
 port      = ${mysql_port}
-server_id = 1234${mysql_port} 
+server_id = $(echo $RANDOM)${mysql_port} 
 basedir   = ${base_dir}
 datadir   = /${data_root_dir}/mysql/${mysql_port}/data
 log_bin   = /${data_root_dir}/mysql/${mysql_port}/logs/mysql-bin
+relay_log = /${data_root_dir}/mysql/${mysql_port}/logs/relay-log
 tmpdir    = /${data_root_dir}/mysql/${mysql_port}/tmp
 socket    = /${data_root_dir}/mysql/${mysql_port}/data/mysqld.sock
 pid_file  = /${data_root_dir}/mysql/${mysql_port}/data/mysqld.pid
@@ -106,6 +107,10 @@ innodb_buffer_pool_dump_at_shutdown = 1
 innodb_buffer_pool_dump_pct  =25
 innodb_sort_buffer_size      = 8M
 innodb_buffer_pool_instances = 8
+
+#WRITE SET
+binlog_transaction_dependency_tracking = WRITESET
+transaction_write_set_extraction       = XXHASH64
 
 # CACHE
 key_buffer_size     = 32M
