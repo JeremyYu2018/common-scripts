@@ -62,8 +62,8 @@ relay_log = /${data_root_dir}/mysql/${mysql_port}/logs/relay-log
 tmpdir    = /${data_root_dir}/mysql/${mysql_port}/tmp
 socket    = /${data_root_dir}/mysql/${mysql_port}/data/mysqld.sock
 pid_file  = /${data_root_dir}/mysql/${mysql_port}/data/mysqld.pid
-log_error = mysql-error.log
-log-output           = TABLE,FILE
+log_error = error.log
+log-output  = TABLE,FILE
 
 # BINLOG
 binlog_error_action  = ABORT_SERVER
@@ -129,12 +129,14 @@ sort_buffer_size    = 8M
 # SEMISYNC #
 plugin_load = "rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so"
 
-# SLOW LOG
+# SLOW LOG AND GENERAL LOG
 slow_query_log        = 1
-slow_query_log_file   = mysql-slow.log
+slow_query_log_file   = slow.log
 long_query_time       = 1
 log_slow_admin_statements = 1
 log_slow_slave_statements = 1
+general_log            = 0
+general_log_file       = /data/mysql/3307/data/general.log
 
 # MISC
 log_timestamps         = SYSTEM
