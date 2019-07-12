@@ -208,6 +208,8 @@ WantedBy=multi-user.target
 [Service]
 User=mysql
 
+Restart=on-failure
+
 Type=forking
 
 PIDFile=/${data_root_dir}/mysql/${mysql_port}/data/mysqld.pid
