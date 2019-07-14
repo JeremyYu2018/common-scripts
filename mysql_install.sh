@@ -107,6 +107,7 @@ innodb_buffer_pool_dump_at_shutdown = 1
 innodb_buffer_pool_dump_pct  =25
 innodb_sort_buffer_size      = 8M
 innodb_buffer_pool_instances = 8
+innodb_online_alter_log_max_size = 1G
 
 #WRITE SET
 binlog_transaction_dependency_tracking = WRITESET
