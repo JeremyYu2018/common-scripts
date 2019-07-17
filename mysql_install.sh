@@ -137,7 +137,7 @@ long_query_time       = 1
 log_slow_admin_statements = 1
 log_slow_slave_statements = 1
 general_log            = 0
-general_log_file       = /data/mysql/{mysql_port}/data/general.log
+general_log_file       = /data/mysql/${mysql_port}/data/general.log
 
 # MISC
 log_timestamps         = SYSTEM
