@@ -215,7 +215,7 @@ Type=forking
 
 PIDFile=/${data_root_dir}/mysql/${mysql_port}/data/mysqld.pid
 
-TimeoutStartSec=0
+TimeoutStartSec=900
 TimeoutStopSec=30
 
 # Set cgroups which systemd support
