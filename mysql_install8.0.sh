@@ -66,6 +66,7 @@ pid_file  = /${data_root_dir}/mysql/${mysql_port}/data/mysqld.pid
 default_authentication_plugin = mysql_native_password 
 log_error = error.log
 log-output  = TABLE,FILE
+log_error_verbosity = 3
 
 # BINLOG
 binlog_error_action  = ABORT_SERVER
