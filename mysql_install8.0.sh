@@ -129,7 +129,7 @@ join_buffer_size    = 8M
 sort_buffer_size    = 8M
 
 # SEMISYNC #
-plugin_load = "rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so"
+plugin_load = "rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so;clone=mysql_clone.so"
 
 # SLOW LOG AND GENERAL LOG
 slow_query_log        = 1
